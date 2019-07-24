@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Cyface GmbH
+ * Copyright 2018 Cyface GmbH
  *
  * This file is part of the Cyface SDK for Android.
  *
@@ -16,23 +16,28 @@
  * You should have received a copy of the GNU General Public License
  * along with the Cyface SDK for Android. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.cyface.app.utils;
+package de.cyface.utils;
 
 /**
- * A runtime exception thrown when a pre- or post condition check fails.
+ * Final static constants used by multiple classes.
  *
  * @author Armin Schnabel
  * @version 1.0.1
- * @since 1.0.0
+ * @since 2.5.0
  */
-public class ValidationException extends RuntimeException {
+public final class Constants {
+
     /**
-     * Creates a new completely initialized {@code ValidationException} with a message explaining further details about
-     * the reasons of this exception.
-     *
-     * @param detailMessage Provides a detailed explanation about this exception.
+     * Tag used to identify Logcat messages issued by instances of this package.
      */
-    public ValidationException(final String detailMessage) {
-        super(detailMessage);
+    public final static String TAG = "de.cyface.utils";
+    /**
+     * The minimum space required for capturing. We don't want to use the space full up as this would
+     * slow down the device and could get unusable.
+     */
+    final static long MINIMUM_MEGABYTES_REQUIRED = 100L;
+
+    private Constants() {
+        // Nothing to do here.
     }
 }

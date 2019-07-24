@@ -1,7 +1,7 @@
-package de.cyface.app.utils;
+package de.cyface.utils;
 
-import static de.cyface.app.utils.Constants.MINIMUM_MEGABYTES_REQUIRED;
-import static de.cyface.app.utils.Constants.TAG;
+import static de.cyface.utils.Constants.MINIMUM_MEGABYTES_REQUIRED;
+import static de.cyface.utils.Constants.TAG;
 
 import java.util.Locale;
 

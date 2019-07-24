@@ -16,13 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with the Cyface SDK for Android. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.cyface.app.utils;
+package de.cyface.utils;
 
 import java.util.Collection;
-
-import android.content.ContentProvider;
-import android.database.Cursor;
-import androidx.annotation.Nullable;
 
 /**
  * A class with static methods to check method pre- and post conditions.

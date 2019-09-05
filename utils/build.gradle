@@ -20,7 +20,7 @@
  * Gradle's build file for the utils module.
  *
  * @author Armin Schnabel
- * @version 1.0.0
+ * @version 1.1.0
  * @since 1.0.0
  */
 
@@ -55,7 +55,7 @@ android {
         }
     }
 
-    // Required by Roboeletric
+    // Required by Roboletric
     testOptions {
         unitTests {
             includeAndroidResources = true
@@ -80,3 +80,6 @@ dependencies {
     testImplementation "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
     testImplementation "org.robolectric:robolectric:$rootProject.ext.robolectricVersion"
 }
+
+// Bintray is used to publish this lib to maven
+apply from: 'publish.gradle'

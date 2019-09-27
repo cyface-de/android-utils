@@ -19,15 +19,17 @@ This library is published to a custom Maven Repository. To it as a dependency yo
 
 ``` 
 repositories {
+    // Other maven repositories, e.g.:
     jcenter()
     google()
+    // Repository for Cyface Android Utils library
     maven {
         url 'https://dl.bintray.com/cyface-de/android-utils'
     }
 }
 ```
 
-* Add the cyface-utils library as dependency in your `build.gradle`:
+* Add the cyface-utils library as dependency in your app's `build.gradle`:
 
 ```
 dependencies {
@@ -35,7 +37,7 @@ dependencies {
 }
 ```
 
-* Set the `$utilsVersion` gradle variable to a version. See the latest version [here](https://bintray.com/cyface-de/android-utils/de.cyface.utils).  
+* Set the `$utilsVersion` gradle variable to a version. Check the latest version in the [Maven Repository](https://bintray.com/cyface-de/android-utils/de.cyface.utils).  
 
 ## Development Guide
 

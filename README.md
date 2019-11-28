@@ -2,21 +2,30 @@ Cyface Android Utils Library
 =================================
 
 This project contains the Cyface Android Utils Library which contains methods and classes used by multiple Cyface Libraries.
-
 This separation is required to avoid circular dependencies.
 
-## Android Coding Guidelines ##
-UI Elements should be represented by their own class implementing the corresponding listener.
-
-## Integration Guide
+Integration Guide
+---------------------
 
 This library is published to the "Github Packages" Repository.
 
 To use it as a dependency you need to:
 
-1. Setup the Github Packages repository for this dependency: 
+1. Make sure you linked the repository:
 
-    * TODO
+    * Add the custom repository in your `build.gradle`:
+
+    ``` 
+    repositories {
+        // Other maven repositories, e.g.:
+        jcenter()
+        google()
+        // Repository for this library
+        maven {
+            url = uri("https://maven.pkg.github.com/cyface-de/android-utils")
+        }
+    }
+    ```
 
 2. Add this package as a dependency to your app's `build.gradle`:
 
@@ -28,13 +37,20 @@ To use it as a dependency you need to:
 
 3. Set the `$utilsVersion` gradle variable to the [latest version](https://github.com/cyface-de/android-utils/packages).    
 
-## Development Guide
+Development Guide
+--------------------
+
+### Android Coding Guidelines
+
+UI Elements should be represented by their own class implementing the corresponding listener.
+
+### Release a new version
 
 This library is published to the "Github Packages" Repository.
 
 To publish a new version you need to:
 
-1. Authenticate to Github Packages
+1. Make sure you are authenticated to the repository:
 
     * Have write-access to this Github repository 
     * Create a [personal access token on Github](https://github.com/settings/tokens) with "write:packages" permissions

@@ -1,7 +1,7 @@
 /*
  * Copyright 2017 Cyface GmbH
  *
- * This file is part of the Cyface SDK for Android.
+ * This file is part of the Cyface Utils for Android.
  *
  * The Cyface SDK for Android is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
  * along with the Cyface SDK for Android. If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * Gradle's build file for the utils module.
+ * Gradle's build file for this module.
  *
  * @author Armin Schnabel
  * @version 1.1.0
@@ -34,7 +34,6 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
 
-        versionCode 1
         versionName rootProject.ext.version
 
         testInstrumentationRunner rootProject.ext.testInstrumentationRunner
@@ -65,21 +64,21 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.androidxAppCompatVersion"
 
     // Dependencies for instrumentation tests
-    androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.extJunitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitVersion"
     androidTestImplementation "androidx.test:rules:$rootProject.ext.rulesVersion"
 
     // Dependencies for local unit tests
     // - If Junit symbols are not resolvable in IntelliJ, make sure Build Variant is set to debug
     // - Loading another dependency (e.g. module) only it's production dependencies (compile) are loaded but not other dependencies (e.g. testCompile)
-    testImplementation "junit:junit:$rootProject.ext.junitVersion"
+    testImplementation "androidx.test.ext:junit:$rootProject.ext.junitVersion"
     testImplementation "org.mockito:mockito-core:$rootProject.ext.mockitoVersion"
     // Optional - For better debuggable asserts
     testImplementation "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
     testImplementation "org.robolectric:robolectric:$rootProject.ext.robolectricVersion"
 }
 
-// Bintray is used to publish this lib to maven
+// The gradle publish tasks is defined in a separate file:
 apply from: 'publish.gradle'

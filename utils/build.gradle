@@ -39,12 +39,6 @@ android {
         testInstrumentationRunner rootProject.ext.testInstrumentationRunner
     }
 
-    testOptions {
-        unitTests {
-            includeAndroidResources = true
-        }
-    }
-
     // Enable Proguard for the release build type.
     buildTypes {
         release {

@@ -64,7 +64,7 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.androidxAppCompatVersion"
 
     // Dependencies for instrumentation tests
     androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitVersion"

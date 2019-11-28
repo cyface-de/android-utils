@@ -7,7 +7,7 @@ This separation is required to avoid circular dependencies.
 Integration Guide
 ---------------------
 
-This library is published to the "Github Packages" Repository.
+This library is published to the Github Package Registry.
 
 To use it as a dependency you need to:
 
@@ -46,7 +46,7 @@ UI Elements should be represented by their own class implementing the correspond
 
 ### Release a new version
 
-This library is published to the "Github Packages" Repository.
+This library is published to the Github Package Registry.
 
 To publish a new version you need to:
 

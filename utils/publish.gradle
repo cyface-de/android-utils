@@ -1,7 +1,7 @@
 /*
  * Copyright 2019 Cyface GmbH
  *
- * This file is part of the Cyface SDK for Android.
+ * This file is part of the Cyface Utils for Android.
  *
  * The Cyface SDK for Android is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,31 +17,40 @@
  * along with the Cyface SDK for Android. If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * Gradle's publish file for the utils module.
- *
- * See https://github.com/bintray/gradle-bintray-plugin#readme
+ * Gradle configuration to release this module to Github Packages.
  *
  * @author Armin Schnabel
- * @version 1.0.0
+ * @version 2.0.0
  * @since 1.0.0
  */
 
 apply plugin: 'maven-publish'
-apply plugin: 'com.jfrog.bintray'
 
-version rootProject.ext.version
-group rootProject.ext.groupId
+// Load credentials
+def properties = new Properties()
+properties.load(new FileInputStream("local.properties"))
 
 publishing {
+    // Authenticate at the repository
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/cyface-de/android-utils")
+            credentials {
+                username = properties.getProperty("github.user")
+                password = properties.getProperty("github.token")
+            }
+        }
+    }
     publications {
         Production(MavenPublication) {
 
             artifact("$buildDir/outputs/aar/utils-release.aar") {
                 builtBy tasks.getByName("assemble")
             }
-            groupId this.group
-            artifactId 'android-utils'
-            version this.version
+            groupId rootProject.ext.groupId
+            artifactId rootProject.ext.artifactId
+            version rootProject.ext.version
 
             pom.withXml {
                 // Define this explicitly if using implementation or api configurations
@@ -57,31 +66,6 @@ publishing {
                     }
                 }
             }
-        }
-    }
-}
-
-def properties = new Properties()
-properties.load(new FileInputStream("local.properties"))
-
-bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
-    publications = ['Production']
-    configurations = ['archives']
-    override = true
-    pkg {
-        repo = 'android-utils'
-        name = 'de.cyface.utils'
-        userOrg = 'cyface-de'
-        description = "utility classes required by multiple Cyface Android libraries and projects"
-        licenses = ['GPL-3.0']
-        vcsUrl = 'https://github.com/cyface-de/android-utils'
-        version {
-            name = this.version
-            desc = "Version ${this.version}"
-            released = new Date()
-            vcsTag = this.version
         }
     }
 }

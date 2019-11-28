@@ -10,39 +10,62 @@ UI Elements should be represented by their own class implementing the correspond
 
 ## Integration Guide
 
-This library is published to a custom Maven Repository. To use it as a dependency you need to:
+This library is published to the "Github Packages" Repository.
 
-* Add this custom maven repository in your `build.gradle`:
+To use it as a dependency you need to:
 
-``` 
-repositories {
-    // Other maven repositories, e.g.:
-    jcenter()
-    google()
-    // Repository for Cyface Android Utils library
-    maven {
-        url 'https://dl.bintray.com/cyface-de/android-utils'
+1. Setup the Github Packages repository for this dependency: 
+
+    * TODO
+
+2. Add this package as a dependency to your app's `build.gradle`:
+
+    ```
+    dependencies {
+        implementation "de.cyface:android-utils:$utilsVersion"
     }
-}
-```
+    ```
 
-* Add the cyface-utils library as dependency in your app's `build.gradle`:
-
-```
-dependencies {
-    implementation "de.cyface:android-utils:$utilsVersion"
-}
-```
-
-* Set the `$utilsVersion` gradle variable to a version. Check the latest version in the [Maven Repository](https://bintray.com/cyface-de/android-utils/de.cyface.utils).  
+3. Set the `$utilsVersion` gradle variable to the [latest version](https://github.com/cyface-de/android-utils/packages).    
 
 ## Development Guide
 
-This library is published using the [Bintray Plugin](https://github.com/bintray/gradle-bintray-plugin).
+This library is published to the "Github Packages" Repository.
 
 To publish a new version you need to:
 
+1. Authenticate to Github Packages
+
+    * Have write-access to this Github repository 
+    * Create a [personal access token on Github](https://github.com/settings/tokens) with "write:packages" permissions
+    * Create or adjust a `local.properties` file in the project root containing:
+
+    ```
+    github.user=YOUR_USERNAME
+    github.token=YOUR_ACCESS_TOKEN
+    ```
+
+2. Publish a new version
+
 * Increment the `build.gradle`'s `ext.version`
-* Execute the publish command `./gradlew clean build bintrayUpload`
-* Log in to [Bintray](https://bintray.com/cyface-de/android-utils/de.cyface.utils) (you must be part of the cyface-de Team)
-* Click on the `Publish` button of the `Notice` which shows you that a release is ready to be published
+* Execute the publish command `./gradlew clean build publish`
+
+
+License
+-------------------
+Copyright 2017 Cyface GmbH
+
+This file is part of the Cyface Utils for Android.
+
+The Cyface Utils for Android is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+The Cyface Utils for Android is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with the Cyface Utils for Android. If not, see <http://www.gnu.org/licenses/>.

@@ -60,8 +60,6 @@ ext {
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 }
 
-group = ext.groupId
-
 allprojects {
     repositories {
         google()

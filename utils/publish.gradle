@@ -34,7 +34,6 @@ publishing {
     // Authenticate at the repository
     repositories {
         maven {
-            name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/cyface-de/android-utils")
             credentials {
                 username = properties.getProperty("github.user")

@@ -7,15 +7,27 @@ This separation is required to avoid circular dependencies.
 Integration Guide
 ---------------------
 
-This library is published to the "Github Packages" Repository.
+This library is published to the Github Package Registry.
 
 To use it as a dependency you need to:
 
-1. Make sure you linked the repository:
+1. Make sure you are authenticated to the repository:
 
-    * Add the custom repository in your `build.gradle`:
+    * You need a Github account with read-access to this Github repository
+    * Create a [personal access token on Github](https://github.com/settings/tokens) with "read:packages" permissions
+    * Create or adjust a `local.properties` file in the project root containing:
+
+    ```
+    github.user=YOUR_USERNAME
+    github.token=YOUR_ACCESS_TOKEN
+    ```
+
+    * Add the custom repository to your `build.gradle`:
 
     ``` 
+    def properties = new Properties()
+    properties.load(new FileInputStream("local.properties"))
+
     repositories {
         // Other maven repositories, e.g.:
         jcenter()
@@ -23,6 +35,10 @@ To use it as a dependency you need to:
         // Repository for this library
         maven {
             url = uri("https://maven.pkg.github.com/cyface-de/android-utils")
+            credentials {
+                username = properties.getProperty("github.user")
+                password = properties.getProperty("github.token")
+            }
         }
     }
     ```
@@ -35,24 +51,20 @@ To use it as a dependency you need to:
     }
     ```
 
-3. Set the `$utilsVersion` gradle variable to the [latest version](https://github.com/cyface-de/android-utils/packages).    
+3. Set the `$utilsVersion` gradle variable to the [latest version](https://github.com/cyface-de/android-utils/releases).    
 
 Development Guide
 --------------------
 
-### Android Coding Guidelines
-
-UI Elements should be represented by their own class implementing the corresponding listener.
-
 ### Release a new version
 
-This library is published to the "Github Packages" Repository.
+This library is published to the Github Package Registry.
 
 To publish a new version you need to:
 
 1. Make sure you are authenticated to the repository:
 
-    * Have write-access to this Github repository 
+    * You need a Github account with write-access to this Github repository 
     * Create a [personal access token on Github](https://github.com/settings/tokens) with "write:packages" permissions
     * Create or adjust a `local.properties` file in the project root containing:
 
@@ -63,8 +75,8 @@ To publish a new version you need to:
 
 2. Publish a new version
 
-* Increment the `build.gradle`'s `ext.version`
-* Execute the publish command `./gradlew clean build publish`
+    * Increment the `build.gradle`'s `ext.version`
+    * Execute the publish command `./gradlew publish`
 
 
 License

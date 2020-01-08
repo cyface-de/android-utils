@@ -1,6 +1,9 @@
 Cyface Android Utils Library
 =================================
 
+[<img src="https://github.com/cyface-de/android-utils/workflows/Gradle%20Build/badge.svg">](https://github.com/cyface-de/android-utils/actions)
+[<img src="https://github.com/cyface-de/android-utils/workflows/Gradle%20Publish/badge.svg">](https://github.com/cyface-de/android-utils/actions)
+
 This project contains the Cyface Android Utils Library which contains methods and classes used by multiple Cyface Libraries.
 This separation is required to avoid circular dependencies.
 

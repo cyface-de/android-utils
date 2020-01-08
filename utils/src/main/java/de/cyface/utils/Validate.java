@@ -20,52 +20,62 @@ package de.cyface.utils;
 
 import java.util.Collection;
 
+import androidx.annotation.Nullable;
+
 /**
  * A class with static methods to check method pre- and post conditions.
  *
  * @author Klemens Muthmann
  * @author Armin Schnabel
- * @version 1.2.1
+ * @version 2.0.0
  * @since 2.2.0
  */
 public class Validate {
 
+    @SuppressWarnings("unused") // Part of the API
     public static void notEmpty(final String string) {
         notEmpty("String should not be empty.", string);
     }
 
+    @SuppressWarnings("WeakerAccess") // Part of the API
     public static void notEmpty(final String message, final String string) {
         if (string == null || string.isEmpty()) {
             throw new ValidationException(message);
         }
     }
 
+    @SuppressWarnings("unused") // Part of the API
     public static void notEmpty(final Collection collection) {
         if (collection == null || collection.isEmpty()) {
             throw new ValidationException("Collection may not be empty or null.");
         }
     }
 
+    @SuppressWarnings("unused") // Part of the API
     public static void notEmpty(final Object[] array) {
         if (array == null || array.length == 0) {
             throw new ValidationException("Array may not be empty or null.");
         }
     }
 
-    public static void notNull(final String message, final Object object) {
+    @SuppressWarnings("WeakerAccess") // Part of the API
+    public static void notNull(final String message, @Nullable final Object object) {
         if (object == null) {
             throw new ValidationException(message);
         }
     }
 
-    public static void notNull(final Object object) {
+    @SuppressWarnings("unused") // Part of the API
+    public static void notNull(@Nullable final Object object) {
         notNull("Object was null.", object);
     }
 
+    @SuppressWarnings("unused") // Part of the API
     public static void isTrue(final boolean b) {
         isTrue(b, "Expression was not true.");
     }
 
+    @SuppressWarnings("WeakerAccess") // Part of the API
     public static void isTrue(final boolean b, final String message) {
         if (!b) {
             throw new ValidationException(message);

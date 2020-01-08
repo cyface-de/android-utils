@@ -3,17 +3,12 @@
 # @author Armin Schnabel
 # @version 1.0.0
 # @since 1.2.2
-name: Gradle Build
+name: Gradle Publish
 
 on:
   push:
-    branches:
-      - master
-      - dev
-  pull_request:
-    branches:
-      - master
-      - dev
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+*'
 
 jobs:
   build:
@@ -26,5 +21,10 @@ jobs:
       with:
         java-version: 1.8
 
-    - name: Build with Gradle
-      run: ./gradlew build
+    - name: Create local.properties with a repository token
+      run: |
+        # Use the repository's automatically set up token to pushlish to the registry
+        echo "github.user=cyface-de" > local.properties
+        echo "github.token=${{ secrets.GITHUB_TOKEN }}" >> local.properties
+    - name: Publish with Gradle
+      run: ./gradlew publish

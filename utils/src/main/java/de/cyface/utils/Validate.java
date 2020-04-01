@@ -27,7 +27,7 @@ import androidx.annotation.Nullable;
  *
  * @author Klemens Muthmann
  * @author Armin Schnabel
- * @version 2.0.1
+ * @version 2.0.2
  * @since 2.2.0
  */
 public class Validate {
@@ -65,7 +65,7 @@ public class Validate {
         }
     }
 
-    @SuppressWarnings("unused") // Part of the API
+    @SuppressWarnings({"unused", "WeakerAccess"}) // Part of the API
     public static void notNull(@Nullable final Object object) {
         notNull("Object was null.", object);
     }

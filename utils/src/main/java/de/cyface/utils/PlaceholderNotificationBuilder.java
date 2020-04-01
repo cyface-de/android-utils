@@ -42,9 +42,10 @@ import androidx.core.app.NotificationCompat;
  *
  * @author Klemens Muthmann
  * @author Armin Schnabel
- * @version 2.0.1
+ * @version 2.0.2
  * @since 1.1.0
  */
+@SuppressWarnings("unused") // Part of the API
 public final class PlaceholderNotificationBuilder {
     /**
      * Creates the placeholder notification for the provided {@code Context}.
@@ -58,6 +59,7 @@ public final class PlaceholderNotificationBuilder {
 
         final NotificationManager notificationManager = (NotificationManager)context
                 .getSystemService(Context.NOTIFICATION_SERVICE);
+        Validate.notNull(notificationManager);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O
                 && notificationManager.getNotificationChannel(channelId) == null) {
             final NotificationChannel channel = new NotificationChannel(channelId,

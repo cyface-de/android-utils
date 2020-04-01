@@ -22,9 +22,10 @@ package de.cyface.utils;
  * A runtime exception thrown when a pre- or post condition check fails.
  *
  * @author Armin Schnabel
- * @version 1.0.1
+ * @version 1.0.2
  * @since 1.0.0
  */
+@SuppressWarnings("WeakerAccess") // Part of the API
 public class ValidationException extends RuntimeException {
     /**
      * Creates a new completely initialized {@code ValidationException} with a message explaining further details about

@@ -31,9 +31,10 @@ import androidx.annotation.Nullable;
  * {@link ContentProvider#query(Uri, String[], Bundle, CancellationSignal)}.
  *
  * @author Armin Schnabel
- * @version 1.0.1
+ * @version 1.0.2
  * @since 3.0.0
  */
+@SuppressWarnings("unused") // Part of the API
 public final class CursorIsNullException extends Exception {
 
     /**
@@ -68,7 +69,7 @@ public final class CursorIsNullException extends Exception {
      * @param cursor the {@code Cursor} to be checked
      * @throws CursorIsNullException If {@link ContentProvider} was inaccessible. See {@code ContentResolver#query()}.
      */
-    public static void softCatchNullCursor(@Nullable Cursor cursor) throws CursorIsNullException{
+    public static void softCatchNullCursor(@Nullable Cursor cursor) throws CursorIsNullException {
         if (cursor == null) {
             throw new CursorIsNullException();
         }

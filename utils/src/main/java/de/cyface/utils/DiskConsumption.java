@@ -1,3 +1,21 @@
+/*
+ * Copyright 2018 Cyface GmbH
+ *
+ * This file is part of the Cyface Utils for Android.
+ *
+ * The Cyface Utils for Android is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * The Cyface Utils for Android is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with the Cyface Utils for Android. If not, see <http://www.gnu.org/licenses/>.
+ */
 package de.cyface.utils;
 
 import static de.cyface.utils.Constants.MINIMUM_MEGABYTES_REQUIRED;
@@ -20,7 +38,7 @@ import androidx.annotation.NonNull;
  *
  * @author Klemens Muthmann
  * @author Armin Schnabel
- * @version 1.0.6
+ * @version 2.0.0
  * @since 1.0.0
  */
 public final class DiskConsumption implements Parcelable {
@@ -36,10 +54,11 @@ public final class DiskConsumption implements Parcelable {
 
     /**
      * Creates a new completely initialized {@code DiskConsumption} object.
-     * 
+     *
      * @param consumedBytes The count of bytes currently used by this app.
      * @param availableBytes The count of bytes still available for this app.
      */
+    @SuppressWarnings("unused") // Part of the API
     public DiskConsumption(final long consumedBytes, final long availableBytes) {
         if (consumedBytes < 0) {
             throw new IllegalArgumentException(String.format(Locale.US,
@@ -52,20 +71,6 @@ public final class DiskConsumption implements Parcelable {
 
         this.consumedBytes = consumedBytes;
         this.availableBytes = availableBytes;
-    }
-
-    /**
-     * @return The count of bytes currently used by this app.
-     */
-    private long getConsumedBytes() {
-        return consumedBytes;
-    }
-
-    /**
-     * @return The count of bytes still available for this app.
-     */
-    private long getAvailableBytes() {
-        return availableBytes;
     }
 
     /*
@@ -131,33 +136,11 @@ public final class DiskConsumption implements Parcelable {
      *
      * @return The number of bytes of space available.
      */
-    public static long bytesAvailable() {
+    private static long bytesAvailable() {
         final StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
-        final long bytesAvailable;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            bytesAvailable = stat.getBlockSizeLong() * stat.getAvailableBlocksLong();
-        } else {
-            bytesAvailable = (long)stat.getBlockSize() * (long)stat.getAvailableBlocks();
-        }
+        final long bytesAvailable = stat.getBlockSizeLong() * stat.getAvailableBlocksLong();
         Log.v(TAG, "Space available: " + (bytesAvailable / (1024 * 1024)) + " MB");
         return bytesAvailable;
-    }
-
-    /**
-     * Checks the size of the storage.
-     *
-     * @return The number of bytes of storage.
-     */
-    public static long storageSize() {
-        final StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
-        final long bytesStorage;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            bytesStorage = stat.getBlockSizeLong() * stat.getBlockCountLong();
-        } else {
-            bytesStorage = (long)stat.getBlockSize() * (long)stat.getBlockCount();
-        }
-        Log.d(TAG, "Total disk space: " + (bytesStorage / (1024 * 1024)) + " MB");
-        return bytesStorage;
     }
 
     /**
@@ -165,6 +148,7 @@ public final class DiskConsumption implements Parcelable {
      *
      * @return True if enough space is available.
      */
+    @SuppressWarnings("unused") // Part of the API
     public static boolean spaceAvailable() {
         return (bytesAvailable() / (1024 * 1024)) > MINIMUM_MEGABYTES_REQUIRED;
     }

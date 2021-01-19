@@ -27,7 +27,7 @@ To use it as a dependency you need to:
 
     * Add the custom repository to your `build.gradle`:
 
-    ``` 
+    ```
     def properties = new Properties()
     properties.load(new FileInputStream("local.properties"))
 
@@ -54,7 +54,7 @@ To use it as a dependency you need to:
     }
     ```
 
-3. Set the `$utilsVersion` gradle variable to the [latest version](https://github.com/cyface-de/android-utils/releases).    
+3. Set the `$utilsVersion` gradle variable to the [latest version](https://github.com/cyface-de/android-utils/releases).
 
 Development Guide
 --------------------
@@ -67,7 +67,7 @@ To publish a new version you need to:
 
 1. Make sure you are authenticated to the repository:
 
-    * You need a Github account with write-access to this Github repository 
+    * You need a Github account with write-access to this Github repository
     * Create a [personal access token on Github](https://github.com/settings/tokens) with "write:packages" permissions
     * Create or adjust a `local.properties` file in the project root containing:
 
@@ -84,7 +84,7 @@ To publish a new version you need to:
 
 License
 -------------------
-Copyright 2017 Cyface GmbH
+Copyright 2017-2021 Cyface GmbH
 
 This file is part of the Cyface Utils for Android.
 

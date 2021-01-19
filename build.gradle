@@ -36,7 +36,7 @@ buildscript {
 
 ext {
     groupId = 'de.cyface'
-    version = '1.3.0'
+    version = '0.0.0'
     artifactId ='android-utils'
 
     minSdkVersion = 21

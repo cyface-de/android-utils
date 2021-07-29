@@ -55,9 +55,19 @@ android {
             returnDefaultValues = true
         }
     }
+
+    // Enabling desugaring to support Java 8 and Java 11 features
+    compileOptions {
+        sourceCompatibility rootProject.ext.sourceCompatibility
+        targetCompatibility rootProject.ext.targetCompatibility
+    }
 }
 
 dependencies {
+    // Utility
+    implementation "org.apache.commons:commons-lang3:$commonsLangVersion" // Using Validate
+
+    // Android
     implementation "androidx.appcompat:appcompat:$rootProject.ext.androidxAppCompatVersion"
 
     // Dependencies for instrumentation tests

@@ -90,7 +90,7 @@ public final class DiskConsumption implements Parcelable {
     /**
      * The <code>Parcelable</code> creator as required by the Android Parcelable specification.
      */
-    public static final Creator<DiskConsumption> CREATOR = new Creator<DiskConsumption>() {
+    public static final Creator<DiskConsumption> CREATOR = new Creator<>() {
         @Override
         public DiskConsumption createFromParcel(final Parcel in) {
             return new DiskConsumption(in);
@@ -119,15 +119,15 @@ public final class DiskConsumption implements Parcelable {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        DiskConsumption that = (DiskConsumption)o;
+        DiskConsumption that = (DiskConsumption) o;
         return consumedBytes == that.consumedBytes && availableBytes == that.availableBytes;
     }
 
     @Override
     public int hashCode() {
         int result = 0;
-        result = 31 * result + (int)(consumedBytes ^ (consumedBytes >>> 32));
-        result = 31 * result + (int)(availableBytes ^ (availableBytes >>> 32));
+        result = 31 * result + (int) (consumedBytes ^ (consumedBytes >>> 32));
+        result = 31 * result + (int) (availableBytes ^ (availableBytes >>> 32));
         return result;
     }
 
@@ -137,8 +137,8 @@ public final class DiskConsumption implements Parcelable {
      * @return The number of bytes of space available.
      */
     private static long bytesAvailable() {
-        final StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
-        final long bytesAvailable = stat.getBlockSizeLong() * stat.getAvailableBlocksLong();
+        final var stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
+        final var bytesAvailable = stat.getBlockSizeLong() * stat.getAvailableBlocksLong();
         Log.v(TAG, "Space available: " + (bytesAvailable / (1024 * 1024)) + " MB");
         return bytesAvailable;
     }

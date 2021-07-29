@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Cyface GmbH
+ * Copyright 2018-2021 Cyface GmbH
  *
  * This file is part of the Cyface Utils for Android.
  *
@@ -32,7 +32,7 @@ import androidx.annotation.Nullable;
  * {@link ContentProvider#query(Uri, String[], Bundle, CancellationSignal)}.
  *
  * @author Armin Schnabel
- * @version 1.0.2
+ * @version 1.0.3
  * @since 3.0.0
  */
 @SuppressWarnings("unused") // Part of the API

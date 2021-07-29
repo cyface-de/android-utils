@@ -24,7 +24,7 @@ import android.os.Build;
  * Contains methods used by multiple Cyface libraries to detect and react to test environments.
  *
  * @author Armin Schnabel
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.1.0
  */
 @SuppressWarnings("unused") // Part of the API

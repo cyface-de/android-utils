@@ -21,8 +21,6 @@ package de.cyface.utils;
 import static de.cyface.utils.Constants.MINIMUM_MEGABYTES_REQUIRED;
 import static de.cyface.utils.Constants.TAG;
 
-import java.util.Locale;
-
 import android.os.Environment;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -31,6 +29,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import java.util.Locale;
+
 /**
  * Objects of this class represent the current disk (or rather SD card) space used and available. This space is mostly
  * filled with unsynchronized measurements. To avoid filling up the users SD card it is advisable to delete
@@ -38,7 +38,7 @@ import androidx.annotation.NonNull;
  *
  * @author Klemens Muthmann
  * @author Armin Schnabel
- * @version 2.0.0
+ * @version 2.0.1
  * @since 1.0.0
  */
 public final class DiskConsumption implements Parcelable {
@@ -55,7 +55,7 @@ public final class DiskConsumption implements Parcelable {
     /**
      * Creates a new completely initialized {@code DiskConsumption} object.
      *
-     * @param consumedBytes The count of bytes currently used by this app.
+     * @param consumedBytes  The count of bytes currently used by this app.
      * @param availableBytes The count of bytes still available for this app.
      */
     @SuppressWarnings("unused") // Part of the API
@@ -90,7 +90,7 @@ public final class DiskConsumption implements Parcelable {
     /**
      * The <code>Parcelable</code> creator as required by the Android Parcelable specification.
      */
-    public static final Creator<DiskConsumption> CREATOR = new Creator<DiskConsumption>() {
+    public static final Creator<DiskConsumption> CREATOR = new Creator<>() {
         @Override
         public DiskConsumption createFromParcel(final Parcel in) {
             return new DiskConsumption(in);
@@ -119,15 +119,15 @@ public final class DiskConsumption implements Parcelable {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        DiskConsumption that = (DiskConsumption)o;
+        DiskConsumption that = (DiskConsumption) o;
         return consumedBytes == that.consumedBytes && availableBytes == that.availableBytes;
     }
 
     @Override
     public int hashCode() {
         int result = 0;
-        result = 31 * result + (int)(consumedBytes ^ (consumedBytes >>> 32));
-        result = 31 * result + (int)(availableBytes ^ (availableBytes >>> 32));
+        result = 31 * result + (int) (consumedBytes ^ (consumedBytes >>> 32));
+        result = 31 * result + (int) (availableBytes ^ (availableBytes >>> 32));
         return result;
     }
 
@@ -137,8 +137,8 @@ public final class DiskConsumption implements Parcelable {
      * @return The number of bytes of space available.
      */
     private static long bytesAvailable() {
-        final StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
-        final long bytesAvailable = stat.getBlockSizeLong() * stat.getAvailableBlocksLong();
+        final var stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
+        final var bytesAvailable = stat.getBlockSizeLong() * stat.getAvailableBlocksLong();
         Log.v(TAG, "Space available: " + (bytesAvailable / (1024 * 1024)) + " MB");
         return bytesAvailable;
     }

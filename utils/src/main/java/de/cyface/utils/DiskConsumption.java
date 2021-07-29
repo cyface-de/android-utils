@@ -21,8 +21,6 @@ package de.cyface.utils;
 import static de.cyface.utils.Constants.MINIMUM_MEGABYTES_REQUIRED;
 import static de.cyface.utils.Constants.TAG;
 
-import java.util.Locale;
-
 import android.os.Environment;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -30,6 +28,8 @@ import android.os.StatFs;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+
+import java.util.Locale;
 
 /**
  * Objects of this class represent the current disk (or rather SD card) space used and available. This space is mostly
@@ -55,7 +55,7 @@ public final class DiskConsumption implements Parcelable {
     /**
      * Creates a new completely initialized {@code DiskConsumption} object.
      *
-     * @param consumedBytes The count of bytes currently used by this app.
+     * @param consumedBytes  The count of bytes currently used by this app.
      * @param availableBytes The count of bytes still available for this app.
      */
     @SuppressWarnings("unused") // Part of the API

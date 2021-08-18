@@ -44,8 +44,8 @@ public class Utils {
      */
     @SuppressWarnings("unused") // Used by app and camera service
     public static void informMediaScanner(@NonNull final Context context, @NonNull final File targetFile) {
-        final var mediaScannerIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        final var fileContentUri = Uri.fromFile(targetFile);
+        final Intent mediaScannerIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        final Uri fileContentUri = Uri.fromFile(targetFile);
         mediaScannerIntent.setData(fileContentUri);
         context.sendBroadcast(mediaScannerIntent);
     }

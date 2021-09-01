@@ -26,8 +26,6 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
-import org.apache.commons.lang3.Validate;
-
 /**
  * Provides a placeholder notification for a background service to show until it gets the real notification from the
  * calling code.
@@ -57,17 +55,18 @@ public final class PlaceholderNotificationBuilder {
      */
     public static Notification build(@NonNull final Context context) {
         Validate.notNull(context, "No context provided!");
-        final String channelId = context.getString(R.string.cyface_notification_channel_id);
+        final var channelId = context.getString(R.string.cyface_notification_channel_id);
 
-        final NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        final var notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         Validate.notNull(notificationManager);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O
                 && notificationManager.getNotificationChannel(channelId) == null) {
-            final NotificationChannel channel = new NotificationChannel(channelId, context.getString(R.string.notification_text), NotificationManager.IMPORTANCE_LOW);
+            final var channel = new NotificationChannel(channelId, context.getString(R.string.notification_text),
+                    NotificationManager.IMPORTANCE_LOW);
             notificationManager.createNotificationChannel(channel);
         }
 
-        final NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId);
+        final var builder = new NotificationCompat.Builder(context, channelId);
         builder.setContentTitle(context.getString(R.string.notification_title));
         builder.setSmallIcon(R.drawable.ic_hourglass_empty_black_24dp);
         builder.setContentText(context.getString(R.string.notification_text));

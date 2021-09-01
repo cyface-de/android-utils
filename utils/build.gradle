@@ -64,9 +64,6 @@ android {
 }
 
 dependencies {
-    // Utility
-    implementation "org.apache.commons:commons-lang3:$rootProject.ext.commonsLangVersion"
-
     // Android
     implementation "androidx.appcompat:appcompat:$rootProject.ext.androidxAppCompatVersion"
 

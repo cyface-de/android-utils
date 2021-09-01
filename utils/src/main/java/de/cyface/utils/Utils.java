@@ -18,13 +18,13 @@
  */
 package de.cyface.utils;
 
+import java.io.File;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
-
-import java.io.File;
 
 /**
  * Static utility methods.
@@ -39,7 +39,7 @@ public class Utils {
     /**
      * A utility method used to fix the bug that newly created files are not visible via MTP (usb data transfer).
      *
-     * @param context    The current Android <code>Context</code> used to access media scanner.
+     * @param context The current Android <code>Context</code> used to access media scanner.
      * @param targetFile The changed file to inform the media scanner about.
      */
     @SuppressWarnings("unused") // Used by app and camera service

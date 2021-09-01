@@ -20,12 +20,12 @@
  * Top-level build file where you can add configuration options common to all sub-projects/modules.
  *
  * @author Armin Schnabel
- * @version 2.1.1
+ * @version 2.1.0
  * @since 1.0.0
  */
 
 buildscript {
-    ext.gradle_version = "4.2.0"
+    ext.gradle_version = "7.0.0"
 
     repositories {
         google()
@@ -66,8 +66,8 @@ ext {
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
     // Java version
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 allprojects {

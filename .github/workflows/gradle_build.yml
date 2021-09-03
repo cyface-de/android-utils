@@ -27,8 +27,8 @@ jobs:
         distribution: 'zulu'
         java-version: '11'
 
-    - name: Create empty local.properties which is required
-      run: echo "" > local.properties
+    - name: Create gradle.properties which is required
+      run: cp gradle.properties.template gradle.properties
 
     - name: Build with Gradle
       run: ./gradlew build

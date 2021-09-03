@@ -20,7 +20,7 @@
  * Top-level build file where you can add configuration options common to all sub-projects/modules.
  *
  * @author Armin Schnabel
- * @version 2.1.0
+ * @version 2.1.1
  * @since 1.0.0
  */
 
@@ -39,7 +39,7 @@ buildscript {
 
 ext {
     // This libraries version
-    version = '3.2.0'
+    version = '3.2.1'
     groupId = 'de.cyface'
     artifactId ='android-utils'
 

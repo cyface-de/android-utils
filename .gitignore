@@ -10,3 +10,9 @@
 .idea/
 **/src/main/gen
 **/src/androidTest/gen
+
+# Only version gradle.properties.template
+/gradle.properties
+
+# git backup files
+*.orig

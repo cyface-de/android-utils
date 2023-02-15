@@ -75,14 +75,12 @@ See https://github.com/cyface-de/android-backend#release-a-new-version[Cyface An
 [arabic]
 . Make sure you are authenticated to the repository:
 * You need a Github account with write-access to this Github repository
-* Create a https://github.com/settings/tokens[personal access token on
-Github] with "write:packages" permissions
-* Create or adjust a `local.properties` file in the project root
-containing:
+* Create a https://github.com/settings/tokens[personal access token on Github] with "write:packages" permissions
+* Copy `gradle.properties.template` to `gradle.properties` and adjust:
 +
 ....
-github.user=YOUR_USERNAME
-github.token=YOUR_ACCESS_TOKEN
+githubUser=YOUR_USERNAME
+githubToken=YOUR_ACCESS_TOKEN
 ....
 . Execute the publish command `./gradlew publishAll`
 
@@ -90,7 +88,7 @@ github.token=YOUR_ACCESS_TOKEN
 [[license]]
 == License
 
-Copyright 2017-2022 Cyface GmbH
+Copyright 2017-2023 Cyface GmbH
 
 This file is part of the Cyface Utils for Android.
 

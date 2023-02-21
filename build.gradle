@@ -66,6 +66,7 @@ ext {
     // Java version
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
+    kotlinTargetJavaVersion = "11"
 }
 
 allprojects {

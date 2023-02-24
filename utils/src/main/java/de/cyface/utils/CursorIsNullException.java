@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2021 Cyface GmbH
+ * Copyright 2018-2023 Cyface GmbH
  *
  * This file is part of the Cyface Utils for Android.
  *
@@ -32,7 +32,7 @@ import androidx.annotation.Nullable;
  * {@link ContentProvider#query(Uri, String[], Bundle, CancellationSignal)}.
  *
  * @author Armin Schnabel
- * @version 1.0.3
+ * @version 1.1.0
  * @since 3.0.0
  */
 @SuppressWarnings("unused") // Part of the API
@@ -60,7 +60,7 @@ public final class CursorIsNullException extends Exception {
     /**
      * Creates a new completely initialized {@link CursorIsNullException} with a default message.
      */
-    private CursorIsNullException() {
+    public CursorIsNullException() {
         super("Cursor is null. Unable to perform operation.");
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2021 Cyface GmbH
+ * Copyright 2019-2023 Cyface GmbH
  *
  * This file is part of the Cyface Utils for Android.
  *
@@ -16,38 +16,35 @@
  * You should have received a copy of the GNU General Public License
  * along with the Cyface Utils for Android. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.cyface.utils;
+package de.cyface.utils
 
-import android.os.Build;
+import android.os.Build
 
 /**
  * Contains methods used by multiple Cyface libraries to detect and react to test environments.
  *
  * @author Armin Schnabel
- * @version 1.0.3
+ * @version 1.0.4
  * @since 1.1.0
  */
-@SuppressWarnings("unused") // Part of the API
-public class TestEnvironment {
-
+@Suppress("unused") // Part of the API
+object TestEnvironment {
     /**
      * Checks the environment this code runs and identifies Emulators, see
      * https://stackoverflow.com/questions/2799097/how-can-i-detect-when-an-android-application-is-running-in-the-emulator
      *
-     * @return {@code True} is an emulator was detected
+     * @return `True` is an emulator was detected
      */
-    public static boolean isEmulator() {
-        // Avoid crashes in unit tests
-        if (Build.FINGERPRINT == null) {
-            return false;
-        }
-        return Build.FINGERPRINT.startsWith("generic")
-                || Build.FINGERPRINT.startsWith("unknown")
-                || Build.MODEL.contains("google_sdk")
-                || Build.MODEL.contains("Emulator")
-                || Build.MODEL.contains("Android SDK built for x86")
-                || Build.MANUFACTURER.contains("Genymotion")
-                || (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic"))
-                || "google_sdk".equals(Build.PRODUCT);
-    }
+    val isEmulator: Boolean
+        get() =// Avoid crashes in unit tests
+            if (Build.FINGERPRINT == null) {
+                false
+            } else (Build.FINGERPRINT.startsWith("generic")
+                    || Build.FINGERPRINT.startsWith("unknown")
+                    || Build.MODEL.contains("google_sdk")
+                    || Build.MODEL.contains("Emulator")
+                    || Build.MODEL.contains("Android SDK built for x86")
+                    || Build.MANUFACTURER.contains("Genymotion")) || Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith(
+                "generic"
+            ) || "google_sdk" == Build.PRODUCT
 }

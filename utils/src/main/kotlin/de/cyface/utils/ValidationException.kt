@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2021 Cyface GmbH
+ * Copyright 2017-2023 Cyface GmbH
  *
  * This file is part of the Cyface Utils for Android.
  *
@@ -16,24 +16,15 @@
  * You should have received a copy of the GNU General Public License
  * along with the Cyface Utils for Android. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.cyface.utils;
+package de.cyface.utils
 
 /**
  * A runtime exception thrown when a pre- or post condition check fails.
  *
  * @author Armin Schnabel
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.0.0
+ * @param detailMessage Provides a detailed explanation about this exception.
  */
-@SuppressWarnings("WeakerAccess") // Part of the API
-public class ValidationException extends RuntimeException {
-    /**
-     * Creates a new completely initialized {@code ValidationException} with a message explaining further details about
-     * the reasons of this exception.
-     *
-     * @param detailMessage Provides a detailed explanation about this exception.
-     */
-    public ValidationException(final String detailMessage) {
-        super(detailMessage);
-    }
-}
+// Part of the API
+class ValidationException (detailMessage: String?) : RuntimeException(detailMessage)

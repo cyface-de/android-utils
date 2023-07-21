@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Cyface GmbH
+ * Copyright 2018-2023 Cyface GmbH
  *
  * This file is part of the Cyface Utils for Android.
  *
@@ -16,28 +16,42 @@
  * You should have received a copy of the GNU General Public License
  * along with the Cyface Utils for Android. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.cyface.utils;
+package de.cyface.utils
+
+import android.content.Context
+import android.os.Environment
 
 /**
  * Final static constants used by multiple classes.
  *
  * @author Armin Schnabel
- * @version 2.0.0
+ * @version 2.1.0
  * @since 2.5.0
  */
-final class Constants {
-
+internal object Constants {
     /**
      * Tag used to identify Logcat messages issued by instances of this package.
      */
-    final static String TAG = "de.cyface.utils";
+    const val TAG = "de.cyface.utils"
+
     /**
      * The minimum space required for capturing. We don't want to use the space full up as this would
      * slow down the device and could get unusable.
      */
-    final static long MINIMUM_MEGABYTES_REQUIRED = 100L;
+    const val MINIMUM_MEGABYTES_REQUIRED = 100L
 
-    private Constants() {
-        // Nothing to do here.
+    /**
+     * The path where files can be stored by the SDK, e.g. image material.
+     *
+     * **Attention:** This data *is deleted* when the app is uninstalled.
+     */
+    fun externalCyfaceFolderPath(context: Context): String {
+        val paths = context.getExternalFilesDirs(null)
+        Validate.isTrue(paths.isNotEmpty(), "No external storage available")
+        val directory = paths[0]
+        val isExternalStorageMounted =
+            Environment.getExternalStorageState(directory) == Environment.MEDIA_MOUNTED
+        check(isExternalStorageMounted) { "External storage is not mounted" }
+        return directory.path
     }
 }

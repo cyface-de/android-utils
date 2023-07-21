@@ -28,7 +28,7 @@ import android.os.Environment
  * @version 2.1.0
  * @since 2.5.0
  */
-internal object Constants {
+object Constants {
     /**
      * Tag used to identify Logcat messages issued by instances of this package.
      */
@@ -45,6 +45,7 @@ internal object Constants {
      *
      * **Attention:** This data *is deleted* when the app is uninstalled.
      */
+    @Suppress("unused")
     fun externalCyfaceFolderPath(context: Context): String {
         val paths = context.getExternalFilesDirs(null)
         Validate.isTrue(paths.isNotEmpty(), "No external storage available")

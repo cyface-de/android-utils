@@ -39,6 +39,10 @@ buildscript {
     }
 }
 
+plugins {
+    id 'com.google.protobuf' version '0.8.19' apply false // Maybe keep in sync with other usages
+}
+
 ext {
     // This libraries version
     version = "0.0.0" // Automatically overwritten by CI
@@ -56,7 +60,8 @@ ext {
     androidxAppCompatVersion = "1.6.1"
 
     // Other
-    dataStoreVersion = "1.0.0"
+    datastoreVersion = "1.1.0-alpha04" // only 1.1.0 supports multi-process datastore
+    protobufVersion = '3.22.2' // Maybe keep in sync with other protobuf versions
 
     // Testing
     junitVersion = "1.1.5"

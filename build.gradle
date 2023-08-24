@@ -58,10 +58,10 @@ ext {
     // Android dependencies
     androidxAnnotationVersion = "1.6.0"
     androidxAppCompatVersion = "1.6.1"
+    datastoreVersion = "1.1.0-alpha04" // only 1.1.0 supports multi-process datastore
 
     // Other
-    datastoreVersion = "1.1.0-alpha04" // only 1.1.0 supports multi-process datastore
-    protobufVersion = '3.22.2' // Maybe keep in sync with other protobuf versions
+    protobufVersion = '3.22.2' // For Proto Datastore. Maybe keep in sync with other versions.
 
     // Testing
     junitVersion = "1.1.5"

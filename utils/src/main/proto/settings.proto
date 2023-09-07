@@ -22,7 +22,7 @@ option java_package = "de.cyface.utils";
 option java_multiple_files = true;
 
 /**
- * The data types for the values stored in the `AppPreferences`.
+ * The data types for the values stored in the `AppSettings`.
  *
  * See https://protobuf.dev/programming-guides/proto3/
  *
@@ -33,21 +33,25 @@ option java_multiple_files = true;
  * @version: 1.0.0
  */
 message Settings {
+  // Version of this datastore. It helps to support default values and to migrate data. When the
+  // datastore is newly created, it's 0, after default values are set it's 1, then migration happens.
+  uint32 version = 1;
+
   // Whether the map should be automatically centered while moving
-  bool center_map = 1;
+  bool center_map = 2;
 
   // Whether the app should be able to upload measurementsA.
-  bool upload_enabled = 2;
+  bool upload_enabled = 3;
 
   // The maximum frequency with which the IMU sensors should collect data, e.g. 100 Hz.
-  int32 sensor_frequency = 3;
+  int32 sensor_frequency = 4;
 
   // Whether the app should report to the error monitoring service.
-  bool report_errors = 4;
+  bool report_errors = 5;
 
   // The currently selected modality, e.g. 'CAR'.
-  string modality = 5;
+  string modality = 6;
 
   // The API version of the terms accepted by the user, e.g. 5.
-  int32 accepted_terms = 6;
+  int32 accepted_terms = 7;
 }

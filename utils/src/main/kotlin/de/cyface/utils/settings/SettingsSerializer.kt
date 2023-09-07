@@ -16,11 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with the Cyface Utils for Android. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.cyface.utils
+package de.cyface.utils.settings
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
 import com.google.protobuf.InvalidProtocolBufferException
+import de.cyface.utils.Settings
 import java.io.InputStream
 import java.io.OutputStream
 

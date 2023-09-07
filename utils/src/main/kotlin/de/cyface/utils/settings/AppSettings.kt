@@ -16,11 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with the Cyface Utils for Android. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.cyface.utils
+package de.cyface.utils.settings
 
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.MultiProcessDataStoreFactory
+import de.cyface.utils.Settings
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.io.File
@@ -40,7 +41,12 @@ import java.io.File
  * @param context The context to access the preferences from.
  */
 @Suppress("unused") // Part of the API
-class AppSettings(private val context: Context) {
+class AppSettings(context: Context) {
+
+    /**
+     * This avoids leaking the context when this object outlives the Activity of Fragment.
+     */
+    private val appContext = context.applicationContext
 
     /**
      * The data store with multi-process support.
@@ -48,8 +54,13 @@ class AppSettings(private val context: Context) {
     private val dataStore: DataStore<Settings> = MultiProcessDataStoreFactory.create(
         serializer = SettingsSerializer,
         produceFile = {
-            File("${context.cacheDir.path}/app.settings_pb")
-        }
+            File("${appContext.cacheDir.path}/settings.pb")
+        },
+        // TODO [RFR-788]: Add a test to ensure version is not set to 1 if no SharedPreferences file exist
+        // TODO [RFR-788]: Add a test which ensures preferences migration works and not default values are used
+        // TODO [RFR-788]: Add a test where the version is already 1 and SharedPreferences file is found
+        // TODO [RFR-788]: Add a test where the version is 1 and ensure no migration is executed / defaults are set
+        migrations = listOf(PreferencesMigrationFactory.create(appContext))
     )
 
     /**
@@ -71,7 +82,7 @@ class AppSettings(private val context: Context) {
      */
     val centerMapFlow: Flow<Boolean> = dataStore.data
         .map { settings ->
-            settings.centerMap
+            settings.centerMap // FIXME: Use versioning to set default to true
         }
 
     /**
@@ -94,7 +105,7 @@ class AppSettings(private val context: Context) {
     @Suppress("unused") // Part of the API
     val uploadEnabledFlow: Flow<Boolean> = dataStore.data
         .map { settings ->
-            settings.uploadEnabled
+            settings.uploadEnabled // FIXME: Use versioning to set default to true
         }
 
     /**
@@ -117,7 +128,7 @@ class AppSettings(private val context: Context) {
     @Suppress("unused") // Part of the API
     val sensorFrequencyFlow: Flow<Int> = dataStore.data
         .map { settings ->
-            settings.sensorFrequency
+            settings.sensorFrequency // FIXME: Use versioning to set default value
         }
 
     /**

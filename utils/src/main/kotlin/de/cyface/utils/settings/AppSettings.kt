@@ -23,17 +23,17 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.core.MultiProcessDataStoreFactory
 import de.cyface.utils.Settings
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
 import java.io.File
 
 /**
- * Common settings used by all our UIs.
+ * Common settings used by both, UIs and libraries.
  *
- * Attention:
- * - Never mix SingleProcessDataStore with MultiProcessDataStore for the same file.
- * - We use MultiProcessDataStore, i.e. the preferences can be accessed from multiple processes.
- * - Only create one instance of `DataStore` per file in the same process.
- * - We use ProtoBuf to ensure type safety. Rebuild after changing the .proto file.
+ * We currently don't use a repository to abstract the interface of the data types from the data
+ * source. The reason for this is the class is very simple and we don't plan multiple data sources.
+ * If this changes, consider using the standard Android Architecture, see `MeasurementRepository`.
  *
  * @author Armin Schnabel
  * @version 2.0.0
@@ -50,6 +50,15 @@ class AppSettings(context: Context) {
 
     /**
      * The data store with multi-process support.
+     *
+     * The reason for multi-process support is that the upload enabled flag is accessed by a
+     * background service which may run in another process.
+     *
+     * Attention:
+     * - Never mix SingleProcessDataStore with MultiProcessDataStore for the same file.
+     * - We use MultiProcessDataStore, i.e. the preferences can be accessed from multiple processes.
+     * - Only create one instance of `DataStore` per file in the same process.
+     * - We use ProtoBuf to ensure type safety. Rebuild after changing the .proto file.
      */
     private val dataStore: DataStore<Settings> = MultiProcessDataStoreFactory.create(
         serializer = SettingsSerializer,
@@ -60,7 +69,10 @@ class AppSettings(context: Context) {
         // TODO [RFR-788]: Add a test which ensures preferences migration works and not default values are used
         // TODO [RFR-788]: Add a test where the version is already 1 and SharedPreferences file is found
         // TODO [RFR-788]: Add a test where the version is 1 and ensure no migration is executed / defaults are set
-        migrations = listOf(PreferencesMigrationFactory.create(appContext))
+        migrations = listOf(
+            PreferencesMigrationFactory.create(appContext),
+            StoreMigration()
+        )
     )
 
     /**
@@ -134,7 +146,7 @@ class AppSettings(context: Context) {
     /**
      * Saves if errors show be reported.
      *
-     * @param value `True` is errors should be reported.
+     * @param value `true` if errors should be reported.
      */
     @Suppress("unused") // Part of the API
     suspend fun setReportErrors(value: Boolean) {
@@ -146,7 +158,7 @@ class AppSettings(context: Context) {
     }
 
     /**
-     * @return `True` if errors show be reported.
+     * @return `true` if errors should be reported.
      */
     @Suppress("unused") // Part of the API
     val reportErrorsFlow: Flow<Boolean> = dataStore.data
@@ -199,4 +211,17 @@ class AppSettings(context: Context) {
         .map { settings ->
             settings.acceptedTerms
         }
+
+    // TODO: remove all these when DataCapturingButton is converted to Kotlin
+    fun getReportErrorsBlocking(): Boolean {
+        return runBlocking {
+            reportErrorsFlow.first()
+        }
+    }
+
+    fun getModalityBlocking(): String {
+        return runBlocking {
+            modalityFlow.first()
+        }
+    }
 }

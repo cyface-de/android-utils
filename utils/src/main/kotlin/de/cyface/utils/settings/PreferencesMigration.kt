@@ -27,8 +27,8 @@ import de.cyface.utils.Settings
  * Factory for the migration which imports preferences from the previously used SharedPreferences.
  *
  * @author Armin Schnabel
- * @since 3.6.0
  * @version 1.0.0
+ * @since 3.6.0
  */
 object PreferencesMigrationFactory {
 
@@ -49,6 +49,7 @@ object PreferencesMigrationFactory {
     private const val DEFAULT_REPORTING = false
     private const val DEFAULT_ACCEPTED_TERMS = 0
     private const val DEFAULT_SENSOR_FREQUENCY = 100
+    private const val DEFAULT_MODALITY = "UNKNOWN"
 
     /**
      * @param context The context to search and access the old SharedPreferences from.
@@ -72,8 +73,7 @@ object PreferencesMigrationFactory {
             .setUploadEnabled(preferences.getBoolean(SYNCHRONIZATION_KEY, DEFAULT_SYNCHRONIZATION))
             .setSensorFrequency(preferences.getInt(SENSOR_FREQUENCY_KEY, DEFAULT_SENSOR_FREQUENCY))
             .setReportErrors(preferences.getBoolean(ACCEPTED_REPORTING_KEY, DEFAULT_REPORTING))
-            // FIXME: this probably crashes now. Add modality "UNSET" or ""
-            .setModality(preferences.getString(MODALITY_KEY, null))
+            .setModality(preferences.getString(MODALITY_KEY, DEFAULT_MODALITY))
             .setAcceptedTerms(preferences.getInt(ACCEPTED_TERMS_KEY, DEFAULT_ACCEPTED_TERMS))
             .build()
     }

@@ -31,8 +31,8 @@ import java.io.OutputStream
  * For details: https://developer.android.com/topic/libraries/architecture/datastore#proto-datastore
  *
  * @author Armin Schnabel
- * @since 4.0.0
  * @version 1.0.0
+ * @since 4.0.0
  */
 object SettingsSerializer : Serializer<Settings> {
     override val defaultValue: Settings = Settings.getDefaultInstance()

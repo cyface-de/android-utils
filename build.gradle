@@ -58,7 +58,8 @@ ext {
     // Android dependencies
     androidxAnnotationVersion = "1.6.0"
     androidxAppCompatVersion = "1.6.1"
-    datastoreVersion = "1.1.0-alpha05" // only 1.1.0 supports multi-process datastore
+    // 1.1.0-alpha05: ':persistence:mergeExtDexDebugAndroidTest' fails (transitive dependency)
+    datastoreVersion = "1.1.0-alpha04" // only 1.1.0 supports multi-process datastore
 
     // Other
     protobufVersion = '3.22.2' // For Proto Datastore. Maybe keep in sync with other versions.

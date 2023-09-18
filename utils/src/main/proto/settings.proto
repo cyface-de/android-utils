@@ -40,7 +40,7 @@ message Settings {
   // Whether the map should be automatically centered while moving
   bool center_map = 2;
 
-  // Whether the app should be able to upload measurementsA.
+  // Whether the app should be able to upload measurements.
   bool upload_enabled = 3;
 
   // The maximum frequency with which the IMU sensors should collect data, e.g. 100 Hz.

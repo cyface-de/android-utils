@@ -58,6 +58,7 @@ class StoreMigration : DataMigration<Settings> {
             0 -> {
                 @Suppress("UsePropertyAccessSyntax")
                 builder
+                    .setVersion(targetVersion)
                     .setCenterMap(DEFAULT_CENTER_MAP)
                     .setUploadEnabled(DEFAULT_SYNCHRONIZATION)
                     .setSensorFrequency(DEFAULT_SENSOR_FREQUENCY)

@@ -19,8 +19,10 @@
 package de.cyface.utils.settings
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.migrations.SharedPreferencesMigration
 import androidx.datastore.migrations.SharedPreferencesView
+import de.cyface.utils.Constants
 import de.cyface.utils.Settings
 
 /**
@@ -67,6 +69,7 @@ object PreferencesMigrationFactory {
         preferences: SharedPreferencesView,
         settings: Settings
     ): Settings {
+        Log.i(Constants.TAG, "Migrating from shared preferences to version 1")
         return settings.toBuilder()
             .setVersion(1) // Ensure the migrated values below are used instead of default values.
             .setCenterMap(preferences.getBoolean(CENTER_MAP_KEY, DEFAULT_CENTER_MAP))

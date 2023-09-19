@@ -63,7 +63,8 @@ class AppSettings(context: Context) {
     private val dataStore: DataStore<Settings> = MultiProcessDataStoreFactory.create(
         serializer = SettingsSerializer,
         produceFile = {
-            File("${appContext.cacheDir.path}/settings.pb")
+            // With cacheDir the settings are lost on app restart [RFR-799]
+            File("${appContext.filesDir.path}/settings.pb")
         },
         migrations = listOf(
             PreferencesMigrationFactory.create(appContext),

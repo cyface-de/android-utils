@@ -1,1 +1,1 @@
-<manifest package="de.cyface.utils" /><!-- remove package with Gradle 8 [RFR-412] -->
+<manifest package="de.cyface.utils" />

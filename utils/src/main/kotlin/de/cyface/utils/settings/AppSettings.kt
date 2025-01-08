@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Cyface GmbH
+ * Copyright 2023-2025 Cyface GmbH
  *
  * This file is part of the Cyface Utils for Android.
  *
@@ -23,9 +23,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.core.MultiProcessDataStoreFactory
 import de.cyface.utils.Settings
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.runBlocking
 import java.io.File
 
 /**
@@ -36,7 +34,7 @@ import java.io.File
  * If this changes, consider using the standard Android Architecture, see `MeasurementRepository`.
  *
  * @author Armin Schnabel
- * @version 2.0.0
+ * @version 2.1.0
  * @since 3.4.0
  * @param context The context to access the preferences from.
  */
@@ -208,17 +206,4 @@ class AppSettings(context: Context) {
         .map { settings ->
             settings.acceptedTerms
         }
-
-    // TODO: remove all these when DataCapturingButton is converted to Kotlin
-    fun getReportErrorsBlocking(): Boolean {
-        return runBlocking {
-            reportErrorsFlow.first()
-        }
-    }
-
-    fun getModalityBlocking(): String {
-        return runBlocking {
-            modalityFlow.first()
-        }
-    }
 }

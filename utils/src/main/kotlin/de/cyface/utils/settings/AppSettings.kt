@@ -34,12 +34,29 @@ import java.io.File
  * If this changes, consider using the standard Android Architecture, see `MeasurementRepository`.
  *
  * @author Armin Schnabel
- * @version 2.1.0
+ * @version 3.0.0
  * @since 3.4.0
  * @param context The context to access the preferences from.
  */
 @Suppress("unused") // Part of the API
-class AppSettings(context: Context) {
+class AppSettings private constructor(context: Context) {
+
+    /**
+     * Use Singleton to ensure only one instance per process is created. [LEIP-294]
+     *
+     * It should be okay to use a Singleton as this is also suggested in the documentation:
+     * https://developer.android.com/topic/libraries/architecture/datastore#multiprocess
+     */
+    companion object {
+        @Volatile
+        private var instance: AppSettings? = null
+
+        fun getInstance(context: Context): AppSettings {
+            return instance ?: synchronized(this) {
+                instance ?: AppSettings(context.applicationContext).also { instance = it }
+            }
+        }
+    }
 
     /**
      * This avoids leaking the context when this object outlives the Activity of Fragment.

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with the Cyface Utils for Android. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.cyface.utils;
+package de.cyface.utils
 
 /**
  * A runtime exception thrown when a pre- or post condition check fails.
@@ -25,15 +25,12 @@ package de.cyface.utils;
  * @version 1.0.2
  * @since 1.0.0
  */
-@SuppressWarnings("WeakerAccess") // Part of the API
-public class ValidationException extends RuntimeException {
-    /**
-     * Creates a new completely initialized {@code ValidationException} with a message explaining further details about
-     * the reasons of this exception.
-     *
-     * @param detailMessage Provides a detailed explanation about this exception.
-     */
-    public ValidationException(final String detailMessage) {
-        super(detailMessage);
-    }
-}
+// Part of the API
+class ValidationException
+/**
+ * Creates a new completely initialized `ValidationException` with a message explaining further details about
+ * the reasons of this exception.
+ *
+ * @param detailMessage Provides a detailed explanation about this exception.
+ */
+    (detailMessage: String?) : RuntimeException(detailMessage)

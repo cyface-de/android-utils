@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2021 Cyface GmbH
+ * Copyright 2019-2025 Cyface GmbH
  *
  * This file is part of the Cyface Utils for Android.
  *
@@ -26,7 +26,7 @@ import java.io.File
  * Static utility methods.
  *
  * @author Armin Schnabel
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.0.0
  */
 @Suppress("unused") // Used by app and camera service

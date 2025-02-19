@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2021 Cyface GmbH
+ * Copyright 2017-2025 Cyface GmbH
  *
  * This file is part of the Cyface Utils for Android.
  *
@@ -23,7 +23,7 @@ package de.cyface.utils
  *
  * @author Klemens Muthmann
  * @author Armin Schnabel
- * @version 3.0.0
+ * @version 3.0.1
  * @since 2.2.0
  */
 @Suppress("unused") // Part of the API

@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2023 Cyface GmbH
+ * Copyright 2017-2025 Cyface GmbH
  *
  * This file is part of the Cyface Utils for Android.
  *
@@ -20,7 +20,7 @@
  * Gradle's build file for this module.
  *
  * @author Armin Schnabel
- * @version 1.3.0
+ * @version 1.3.1
  * @since 1.0.0
  */
 

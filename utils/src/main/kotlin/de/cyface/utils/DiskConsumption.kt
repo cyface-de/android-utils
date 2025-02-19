@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Cyface GmbH
+ * Copyright 2018-2025 Cyface GmbH
  *
  * This file is part of the Cyface Utils for Android.
  *
@@ -35,7 +35,7 @@ import java.util.Locale
  *
  * @author Klemens Muthmann
  * @author Armin Schnabel
- * @version 2.0.1
+ * @version 2.0.2
  * @since 1.0.0
  */
 class DiskConsumption : Parcelable {

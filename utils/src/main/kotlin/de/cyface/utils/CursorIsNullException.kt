@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2023 Cyface GmbH
+ * Copyright 2018-2025 Cyface GmbH
  *
  * This file is part of the Cyface Utils for Android.
  *
@@ -24,7 +24,7 @@ import android.database.Cursor
  * Wrapper [Exception] for code thrown for a null [Cursor] after executing `ContentProvider.query`.
  *
  * @author Armin Schnabel
- * @version 1.1.0
+ * @version 1.1.1
  * @since 3.0.0
  */
 @Suppress("unused") // Part of the API

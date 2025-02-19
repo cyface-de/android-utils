@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2021 Cyface GmbH
+ * Copyright 2017-2025 Cyface GmbH
  *
  * This file is part of the Cyface Utils for Android.
  *
@@ -22,7 +22,7 @@ package de.cyface.utils
  * A runtime exception thrown when a pre- or post condition check fails.
  *
  * @author Armin Schnabel
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.0.0
  * @param detailMessage Provides a detailed explanation about this exception.
  */

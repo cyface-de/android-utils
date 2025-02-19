@@ -34,5 +34,13 @@ jobs:
       run: |
         cp gradle.properties.template gradle.properties
 
+    - name: Cache Gradle dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.gradle/caches
+        # Only update cache on hash change (gradle build files and the wrapper properties)
+        key: gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: gradle-
+
     - name: Build with Gradle
       run: ./gradlew build

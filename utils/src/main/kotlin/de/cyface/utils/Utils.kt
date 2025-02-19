@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2021 Cyface GmbH
+ * Copyright 2019-2025 Cyface GmbH
  *
  * This file is part of the Cyface Utils for Android.
  *
@@ -16,37 +16,31 @@
  * You should have received a copy of the GNU General Public License
  * along with the Cyface Utils for Android. If not, see <http://www.gnu.org/licenses/>.
  */
-package de.cyface.utils;
+package de.cyface.utils
 
-import java.io.File;
-
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-
-import androidx.annotation.NonNull;
+import android.content.Context
+import android.media.MediaScannerConnection
+import java.io.File
 
 /**
  * Static utility methods.
  *
  * @author Armin Schnabel
- * @version 1.0.2
+ * @version 1.0.3
  * @since 1.0.0
  */
-@SuppressWarnings("unused") // Used by app and camera service
-public class Utils {
-
+@Suppress("unused") // Used by app and camera service
+object Utils {
     /**
      * A utility method used to fix the bug that newly created files are not visible via MTP (usb data transfer).
      *
-     * @param context The current Android <code>Context</code> used to access media scanner.
+     * @param context The current Android `Context` used to access media scanner.
      * @param targetFile The changed file to inform the media scanner about.
      */
-    @SuppressWarnings("unused") // Used by app and camera service
-    public static void informMediaScanner(@NonNull final Context context, @NonNull final File targetFile) {
-        final var mediaScannerIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        final var fileContentUri = Uri.fromFile(targetFile);
-        mediaScannerIntent.setData(fileContentUri);
-        context.sendBroadcast(mediaScannerIntent);
+    @Suppress("unused") // Used by app and camera service
+    fun informMediaScanner(context: Context, targetFile: File) {
+        MediaScannerConnection.scanFile(context, arrayOf(targetFile.absolutePath), null) { _, _ ->
+            // File is automatically updated in the MediaStore
+        }
     }
 }

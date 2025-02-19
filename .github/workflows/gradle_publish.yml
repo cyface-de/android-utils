@@ -1,7 +1,7 @@
 # This workflow publishes a new version to the Github Registry.
 #
 # @author Armin Schnabel
-# @version 1.2.0
+# @version 1.3.0
 # @since 1.2.2
 name: Gradle Publish
 
@@ -28,6 +28,14 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          # Only update cache on hash change (gradle build files and the wrapper properties)
+          key: gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: gradle-
+
       - name: Add gradle.properties
         run: |
           # Use the repository's automatically set up token to publish to the registry
@@ -37,8 +45,7 @@ jobs:
 
       # versionName is required to publish artifacts to Github Registry
       - name: Set versionName
-        run: |
-          sed -i "s/version = \"0.0.0\"/version = \"${{ github.ref_name }}\"/g" build.gradle
+        run: sed -i "s/version = \"0.0.0\"/version = \"${{ github.ref_name }}\"/g" build.gradle
 
       - name: Publish with Gradle
         run: ./gradlew publish

@@ -21,8 +21,7 @@ package de.cyface.utils
 import android.database.Cursor
 
 /**
- * A wrapper [Exception] for code thrown for a null [Cursor] after executing
- * [ContentProvider.query].
+ * Wrapper [Exception] for code thrown for a null [Cursor] after executing `ContentProvider.query`.
  *
  * @author Armin Schnabel
  * @version 1.1.0
@@ -55,7 +54,8 @@ class CursorIsNullException : Exception {
          * Checks if the [Cursor] is null.
          *
          * @param cursor the `Cursor` to be checked
-         * @throws CursorIsNullException If [ContentProvider] was inaccessible. See `ContentResolver#query()`.
+         * @throws CursorIsNullException If `ContentProvider` was inaccessible. See
+         * `ContentResolver#query()`.
          */
         @Throws(CursorIsNullException::class)
         fun softCatchNullCursor(cursor: Cursor?) {

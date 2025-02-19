@@ -30,7 +30,7 @@ apply plugin: 'com.google.protobuf' // For Proto DataStore
 
 android {
     namespace "de.cyface.utils"
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdk = rootProject.ext.compileSdkVersion
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion

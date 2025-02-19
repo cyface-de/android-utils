@@ -33,9 +33,9 @@ object Validate {
         notEmpty("String should not be empty.", string)
     }
 
-    // Part of the API
+    @Suppress("unused", "MemberVisibilityCanBePrivate") // Part of the API
     fun notEmpty(string: String?, message: String?) {
-        if (string == null || string.isEmpty()) {
+        if (string.isNullOrEmpty()) {
             throw ValidationException(message)
         }
     }
@@ -49,7 +49,7 @@ object Validate {
 
     @Suppress("unused") // Part of the API
     fun notEmpty(array: Array<Any?>?) {
-        if (array == null || array.size == 0) {
+        if (array.isNullOrEmpty()) {
             throw ValidationException("Array may not be empty or null.")
         }
     }

@@ -22,13 +22,11 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.os.Build
 import androidx.core.app.NotificationCompat
 
 /**
  * Provides a placeholder notification for a background service to show until it gets the real notification from the
  * calling code.
- *
  *
  * This workaround is required since the background services in some of our Cyface libraries are required to call
  * `android.app.Service#startForeground(int, Notification)` within the first five seconds of its existence. In
@@ -60,11 +58,10 @@ object PlaceholderNotificationBuilder {
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         Validate.notNull(notificationManager)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-            && notificationManager.getNotificationChannel(channelId) == null
-        ) {
+        if (notificationManager.getNotificationChannel(channelId) == null) {
             val channel = NotificationChannel(
-                channelId, context.getString(R.string.notification_text),
+                channelId,
+                context.getString(R.string.notification_text),
                 NotificationManager.IMPORTANCE_LOW
             )
             notificationManager.createNotificationChannel(channel)

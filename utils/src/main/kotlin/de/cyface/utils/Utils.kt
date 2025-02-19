@@ -19,8 +19,7 @@
 package de.cyface.utils
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
+import android.media.MediaScannerConnection
 import java.io.File
 
 /**
@@ -40,9 +39,8 @@ object Utils {
      */
     @Suppress("unused") // Used by app and camera service
     fun informMediaScanner(context: Context, targetFile: File) {
-        val mediaScannerIntent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
-        val fileContentUri = Uri.fromFile(targetFile)
-        mediaScannerIntent.setData(fileContentUri)
-        context.sendBroadcast(mediaScannerIntent)
+        MediaScannerConnection.scanFile(context, arrayOf(targetFile.absolutePath), null) { _, _ ->
+            // File is automatically updated in the MediaStore
+        }
     }
 }

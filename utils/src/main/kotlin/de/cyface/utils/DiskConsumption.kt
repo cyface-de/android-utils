@@ -24,6 +24,8 @@ import android.os.Parcelable
 import android.os.Parcelable.Creator
 import android.os.StatFs
 import android.util.Log
+import de.cyface.utils.Constants.MINIMUM_MEGABYTES_REQUIRED
+import de.cyface.utils.Constants.TAG
 import java.util.Locale
 
 /**
@@ -96,15 +98,15 @@ class DiskConsumption : Parcelable {
         dest.writeLong(availableBytes)
     }
 
-    override fun equals(o: Any?): Boolean {
-        if (this === o) return true
-        if (o == null || javaClass != o.javaClass) return false
-        val that = o as DiskConsumption
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || javaClass != other.javaClass) return false
+        val that = other as DiskConsumption
         return consumedBytes == that.consumedBytes && availableBytes == that.availableBytes
     }
 
     override fun hashCode(): Int {
-        var result = 0
+        var result = 1
         result = 31 * result + (consumedBytes xor (consumedBytes ushr 32)).toInt()
         result = 31 * result + (availableBytes xor (availableBytes ushr 32)).toInt()
         return result
@@ -114,8 +116,10 @@ class DiskConsumption : Parcelable {
         /**
          * The `Parcelable` creator as required by the Android Parcelable specification.
          */
-        val CREATOR: Creator<DiskConsumption> = object : Creator<DiskConsumption?> {
-            override fun createFromParcel(`in`: Parcel): DiskConsumption? {
+        @Suppress("unused") // Required for Parcelable
+        @JvmField
+        val CREATOR: Creator<DiskConsumption> = object : Creator<DiskConsumption> {
+            override fun createFromParcel(`in`: Parcel): DiskConsumption {
                 return DiskConsumption(`in`)
             }
 

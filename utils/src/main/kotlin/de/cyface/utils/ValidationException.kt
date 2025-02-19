@@ -24,13 +24,7 @@ package de.cyface.utils
  * @author Armin Schnabel
  * @version 1.0.2
  * @since 1.0.0
- */
-// Part of the API
-class ValidationException
-/**
- * Creates a new completely initialized `ValidationException` with a message explaining further details about
- * the reasons of this exception.
- *
  * @param detailMessage Provides a detailed explanation about this exception.
  */
-    (detailMessage: String?) : RuntimeException(detailMessage)
+// Part of the API
+class ValidationException(detailMessage: String?) : RuntimeException(detailMessage)

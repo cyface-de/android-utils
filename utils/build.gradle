@@ -71,22 +71,24 @@ android {
 
 dependencies {
     // Android
-    implementation "androidx.appcompat:appcompat:$rootProject.ext.androidxAppCompatVersion"
+    // `api` as the API-class `PlaceholderNotificationBuilder` uses compat
+    api "androidx.appcompat:appcompat:$androidxAppCompatVersion"
 
     // Proto DataStore with MultiProcess support to store settings
-    implementation "androidx.datastore:datastore:${datastoreVersion}"
-    implementation  "com.google.protobuf:protobuf-javalite:${protobufVersion}"
+    // `api` as the API-class `AppSettings` uses datastore
+    api "androidx.datastore:datastore:$datastoreVersion"
+    implementation  "com.google.protobuf:protobuf-javalite:$protobufVersion"
 
     // Dependencies for instrumentation tests
-    androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitVersion"
-    androidTestImplementation "androidx.test:rules:$rootProject.ext.rulesVersion"
+    androidTestImplementation "androidx.test.ext:junit:$junitVersion"
+    androidTestImplementation "androidx.test:rules:$rulesVersion"
 
     // Dependencies for local unit tests
-    testImplementation "androidx.test.ext:junit:$rootProject.ext.junitVersion"
-    testImplementation "org.mockito:mockito-core:$rootProject.ext.mockitoVersion"
+    testImplementation "androidx.test.ext:junit:$junitVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
     // Optional - For better debuggable asserts
-    testImplementation "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
-    testImplementation "org.robolectric:robolectric:$rootProject.ext.robolectricVersion"
+    testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
 }
 
 // Required for Proto DataStore

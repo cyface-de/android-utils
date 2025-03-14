@@ -87,7 +87,7 @@ dependencies {
     testImplementation "androidx.test.ext:junit:$junitVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     // Optional - For better debuggable asserts
-    testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
+    testImplementation "org.hamcrest:hamcrest:$hamcrestVersion"
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
 }
 

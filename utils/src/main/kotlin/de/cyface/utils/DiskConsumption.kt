@@ -18,7 +18,7 @@
  */
 package de.cyface.utils
 
-import android.os.Environment
+import android.content.Context
 import android.os.Parcel
 import android.os.Parcelable
 import android.os.Parcelable.Creator
@@ -131,10 +131,12 @@ class DiskConsumption : Parcelable {
         /**
          * Checks how much storage is left.
          *
+         * @param context The Android context.
          * @return The number of bytes of space available.
          */
-        private fun bytesAvailable(): Long {
-            val stat = StatFs(Environment.getExternalStorageDirectory().path)
+        private fun bytesAvailable(context: Context): Long {
+            val storageDir = StorageHelper.getStorageDirectoryWithFallback(context)
+            val stat = StatFs(storageDir.path)
             val bytesAvailable = stat.blockSizeLong * stat.availableBlocksLong
             Log.v(TAG, "Space available: " + (bytesAvailable / (1024 * 1024)) + " MB")
             return bytesAvailable
@@ -143,11 +145,12 @@ class DiskConsumption : Parcelable {
         /**
          * Checks if at last `MINIMUM_MEGABYTES_REQUIRED` of space is available.
          *
+         * @param context The Android context.
          * @return True if enough space is available.
          */
         @Suppress("unused") // Part of the API
-        fun spaceAvailable(): Boolean {
-            return (bytesAvailable() / (1024 * 1024)) > MINIMUM_MEGABYTES_REQUIRED
+        fun spaceAvailable(context: Context): Boolean {
+            return (bytesAvailable(context) / (1024 * 1024)) > MINIMUM_MEGABYTES_REQUIRED
         }
     }
 }

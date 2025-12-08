@@ -18,9 +18,6 @@
  */
 package de.cyface.utils
 
-import android.content.Context
-import android.os.Environment
-
 /**
  * Final static constants used by multiple classes.
  *
@@ -39,20 +36,4 @@ object Constants {
      * slow down the device and could get unusable.
      */
     const val MINIMUM_MEGABYTES_REQUIRED = 100L
-
-    /**
-     * The path where files can be stored by the SDK, e.g. image material.
-     *
-     * **Attention:** This data *is deleted* when the app is uninstalled.
-     */
-    @Suppress("unused")
-    fun externalCyfaceFolderPath(context: Context): String {
-        val paths = context.getExternalFilesDirs(null)
-        Validate.isTrue(paths.isNotEmpty(), "No external storage available")
-        val directory = paths[0]
-        val isExternalStorageMounted =
-            Environment.getExternalStorageState(directory) == Environment.MEDIA_MOUNTED
-        check(isExternalStorageMounted) { "External storage is not mounted" }
-        return directory.path
-    }
 }

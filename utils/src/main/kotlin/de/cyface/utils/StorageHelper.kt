@@ -33,6 +33,40 @@ import java.io.File
  */
 object StorageHelper {
     /**
+     * Enum representing the type of storage being used.
+     */
+    enum class StorageType {
+        /**
+         * Primary external storage (e.g., app-specific directory on external storage).
+         */
+        EXTERNAL,
+
+        /**
+         * Internal storage (app-specific directory on internal storage).
+         */
+        INTERNAL
+    }
+
+    /**
+     * Checks if primary external storage is available and writable.
+     *
+     * @param context The Android context.
+     * @return The external storage directory if available and writable, null otherwise.
+     */
+    private fun getPrimaryExternalStorageIfAvailable(context: Context): File? {
+        val externalDirs = context.getExternalFilesDirs(null)
+        if (externalDirs.isNotEmpty() && externalDirs[0] != null) {
+            val directory = externalDirs[0]
+            val isExternalStorageMounted =
+                Environment.getExternalStorageState(directory) == Environment.MEDIA_MOUNTED
+            if (isExternalStorageMounted && directory.canWrite()) {
+                return directory
+            }
+        }
+        return null
+    }
+
+    /**
      * Gets the storage directory for the app, trying primary external storage first and falling
      * back to internal storage if external is not available or not writable.
      *
@@ -44,21 +78,49 @@ object StorageHelper {
      * @param context The Android context.
      * @return The storage directory (primary external if available and writable, otherwise internal).
      */
+    // Part of the API
     fun getStorageDirectoryWithFallback(context: Context): File {
-        // Try primary external storage only (first entry)
-        val externalDirs = context.getExternalFilesDirs(null)
-        if (externalDirs.isNotEmpty() && externalDirs[0] != null) {
-            val directory = externalDirs[0]
-            val isExternalStorageMounted =
-                Environment.getExternalStorageState(directory) == Environment.MEDIA_MOUNTED
-            if (isExternalStorageMounted && directory.canWrite()) {
-                Log.d(TAG, "Using primary external storage: ${directory.absolutePath}")
-                return directory
-            }
+        val externalStorage = getPrimaryExternalStorageIfAvailable(context)
+        if (externalStorage != null) {
+            Log.d(TAG, "Using primary external storage: ${externalStorage.absolutePath}")
+            return externalStorage
         }
 
         // Fall back to internal storage
         Log.d(TAG, "Falling back to internal storage: ${context.filesDir.absolutePath}")
         return context.filesDir
+    }
+
+    /**
+     * Gets the path to the storage directory for the app, trying external storage first and falling
+     * back to internal storage if external is not available or not writable.
+     *
+     * This is a convenience method that returns the path as a String.
+     *
+     * @param context The Android context.
+     * @return The storage directory path (external if available and writable, otherwise internal).
+     */
+    @Suppress("unused") // Part of the API
+    fun getStoragePathWithFallback(context: Context): String {
+        return getStorageDirectoryWithFallback(context).path
+    }
+
+    /**
+     * Determines which type of storage is currently being used by the app.
+     *
+     * This method checks the same conditions as getStorageDirectoryWithFallback() and returns
+     * whether external or internal storage would be selected.
+     *
+     * @param context The Android context.
+     * @return StorageType.EXTERNAL if primary external storage is available and writable,
+     *         StorageType.INTERNAL otherwise.
+     */
+    @Suppress("unused") // Part of the API
+    fun getStorageType(context: Context): StorageType {
+        return if (getPrimaryExternalStorageIfAvailable(context) != null) {
+            StorageType.EXTERNAL
+        } else {
+            StorageType.INTERNAL
+        }
     }
 }

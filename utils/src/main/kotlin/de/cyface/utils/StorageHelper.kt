@@ -57,9 +57,12 @@ object StorageHelper {
         val externalDirs = context.getExternalFilesDirs(null)
         if (externalDirs.isNotEmpty() && externalDirs[0] != null) {
             val directory = externalDirs[0]
+            // Removed canWrite() check because it might be unreliable on API 29+
+            // and app-specific external dirs are always writable when mounted.
             val isExternalStorageMounted =
                 Environment.getExternalStorageState(directory) == Environment.MEDIA_MOUNTED
-            if (isExternalStorageMounted && directory.canWrite()) {
+
+            if (isExternalStorageMounted) {
                 return directory
             }
         }

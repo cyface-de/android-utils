@@ -32,8 +32,14 @@ object Constants {
     const val TAG = "de.cyface.utils"
 
     /**
-     * The minimum space required for capturing. We don't want to use the space full up as this would
-     * slow down the device and could get unusable.
+     * The minimum space required for sensor-only capturing. Near-full storage slows down SQLite
+     * and prevents sync from completing (SyncManager kills operations on sluggish I/O).
      */
-    const val MINIMUM_MEGABYTES_REQUIRED = 100L
+    const val MINIMUM_MEGABYTES_REQUIRED = 500L
+
+    /**
+     * The minimum space required when camera is capturing. Camera produces ~5 MB/image at ~1 Hz,
+     * so 3 GB provides ~10 minutes of buffer before the device becomes unusable.
+     */
+    const val MINIMUM_MEGABYTES_REQUIRED_CAMERA = 3_000L
 }

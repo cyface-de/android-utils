@@ -25,6 +25,7 @@ import android.os.Parcelable.Creator
 import android.os.StatFs
 import android.util.Log
 import de.cyface.utils.Constants.MINIMUM_MEGABYTES_REQUIRED
+import de.cyface.utils.Constants.MINIMUM_MEGABYTES_REQUIRED_CAMERA
 import de.cyface.utils.Constants.TAG
 import java.util.Locale
 
@@ -143,14 +144,17 @@ class DiskConsumption : Parcelable {
         }
 
         /**
-         * Checks if at last `MINIMUM_MEGABYTES_REQUIRED` of space is available.
+         * Checks if at least [MINIMUM_MEGABYTES_REQUIRED] (or [MINIMUM_MEGABYTES_REQUIRED_CAMERA]
+         * when [isCamera] is true) of space is available.
          *
          * @param context The Android context.
+         * @param isCamera True when camera is capturing, which requires more headroom.
          * @return True if enough space is available.
          */
         @Suppress("unused") // Part of the API
-        fun spaceAvailable(context: Context): Boolean {
-            return (bytesAvailable(context) / (1024 * 1024)) > MINIMUM_MEGABYTES_REQUIRED
+        fun spaceAvailable(context: Context, isCamera: Boolean = false): Boolean {
+            val threshold = if (isCamera) MINIMUM_MEGABYTES_REQUIRED_CAMERA else MINIMUM_MEGABYTES_REQUIRED
+            return (bytesAvailable(context) / (1024 * 1024)) > threshold
         }
     }
 }

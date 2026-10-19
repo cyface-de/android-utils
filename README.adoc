@@ -65,10 +65,40 @@ dependencies {
 
 This section is only relevant for developers of this library.
 
+Kotlin 2.0.21, Java 21, Gradle 8.13, Android Gradle Plugin 8.5.0, minSdk 26, compileSdk and targetSdk 34. All sources are in one module, `utils/`.
+
+Copy `gradle.properties.template` to `gradle.properties` and add `githubUser` and `githubToken`.
+
+....
+./gradlew build                  # build and run the unit tests (Robolectric)
+./gradlew connectedAndroidTest   # instrumented tests (needs a device or an emulator)
+....
+
+Architecture (`utils/src/main/kotlin/de/cyface/utils/`):
+
+* `settings/` -- the app settings in a Proto DataStore with multi-process support. The schema is `utils/src/main/proto/settings.proto`. `AppSettings` is a synchronized singleton with Flow-based APIs. `PreferencesMigrationFactory` migrates the old SharedPreferences, `StoreMigration` migrates the DataStore schema.
+* `StorageHelper`, `DiskConsumption` -- the storage path with a fallback from external to internal storage, and the free disk space.
+* `Validate`, `PlaceholderNotificationBuilder`, `TestEnvironment`, `Constants`, `Utils` -- other utilities.
+
+`appcompat` and `datastore` are `api` dependencies, so they are part of the public API. The unit tests use Robolectric with `includeAndroidResources = true` and `returnDefaultValues = true`.
+
+[[github-workflows]]
+=== GitHub Workflows
+
+* `gradle_build.yml` builds and tests each push and pull request to `main` and `release-*`. Pull requests from forks are skipped.
+* `gradle_publish.yml` runs on version tags: it publishes the library to GitHub Packages and creates the GitHub release. It gives the token to Gradle as `ORG_GRADLE_PROJECT_githubToken`, not in a file.
+* `codeql.yml` runs the CodeQL analysis each week and on pushes and pull requests.
+
+Rules of the workflows (hardening of CY-6748): do not use `${{ github.ref_name }}` or other event values directly in a `run:` script, pass them through `env:`; pass secrets through `env:` of the step that needs them; use `runs-on: ubuntu-26.04`, not `ubuntu-latest`.
+
+The organization-wide cleanup in `cyface-de/production` (`.github/workflows/registry_cleanup.yml`) deletes old package versions. A version that a build file of the organization names stays.
+
 [[release-a-new-version]]
 === Release a new version
 
-See https://github.com/cyface-de/android-backend#release-a-new-version[Cyface Android SDK Readme]
+* The CI sets the `version` in `build.gradle` from the tag. Do not change it manually.
+* Create an annotated tag with a semantic version (for example `5.1.1`) on `main` and push it. The body of the tag message becomes the release notes.
+* A tag with a suffix (for example `5.1.1-beta1`) becomes a pre-release.
 
 == In case you need to publish _manually_ to the Github Registry
 
@@ -82,13 +112,13 @@ See https://github.com/cyface-de/android-backend#release-a-new-version[Cyface An
 githubUser=YOUR_USERNAME
 githubToken=YOUR_ACCESS_TOKEN
 ....
-. Execute the publish command `./gradlew publishAll`
+. Execute the publish command `./gradlew publish`
 
 
 [[license]]
 == License
 
-Copyright 2017-2025 Cyface GmbH
+Copyright 2017-2026 Cyface GmbH
 
 This file is part of the Cyface Utils for Android.
 

@@ -87,7 +87,7 @@ Architecture (`utils/src/main/kotlin/de/cyface/utils/`):
 
 * `gradle_build.yml` builds and tests each push and pull request to `main` and `release-*`. Pull requests from forks are skipped.
 * `gradle_publish.yml` runs on version tags: it publishes the library to GitHub Packages and creates the GitHub release. It gives the token to Gradle as `ORG_GRADLE_PROJECT_githubToken`, not in a file.
-* `codeql.yml` runs the CodeQL analysis on pushes and pull requests. It has no weekly run, because GitHub disables a scheduled workflow in a public repository after 60 days without activity.
+* `codeql.yml` runs the CodeQL analysis on pushes and pull requests. You can also start it by hand. It has no weekly run, because GitHub disables a scheduled workflow in a public repository after 60 days without activity.
 
 Rules of the workflows (hardening of CY-6748): do not use `${{ github.ref_name }}` or other event values directly in a `run:` script, pass them through `env:`; pass secrets through `env:` of the step that needs them; use `runs-on: ubuntu-26.04`, not `ubuntu-latest`.
 

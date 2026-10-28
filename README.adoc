@@ -65,7 +65,7 @@ dependencies {
 
 This section is only relevant for developers of this library.
 
-Kotlin 2.0.21, Java 21, Gradle 8.13, Android Gradle Plugin 8.5.0, minSdk 26, compileSdk and targetSdk 34. All sources are in one module, `utils/`.
+Kotlin 2.4.21, Java 21, Gradle 9.7.1, Android Gradle Plugin 9.4.1, minSdk 26, compileSdk 37, targetSdk 36. All sources are in one module, `utils/`. AGP 9 compiles the Kotlin code (built-in Kotlin), so the module does not apply `org.jetbrains.kotlin.android`. A library has no targetSdk of its own: the value in `testOptions` and `lint` is only for the tests and the lint checks. The apps that use this library need compileSdk 37 or higher.
 
 Copy `gradle.properties.template` to `gradle.properties` and add `githubUser` and `githubToken`.
 

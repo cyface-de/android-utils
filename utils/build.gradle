@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2025 Cyface GmbH
+ * Copyright 2017-2026 Cyface GmbH
  *
  * This file is part of the Cyface Utils for Android.
  *
@@ -20,25 +20,21 @@
  * Gradle's build file for this module.
  *
  * @author Armin Schnabel
- * @version 1.3.1
+ * @version 1.4.0
  * @since 1.0.0
  */
 
-apply plugin: 'com.android.library'
-apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'com.android.library' // Compiles Kotlin, too (built-in Kotlin of AGP 9)
 apply plugin: 'com.google.protobuf' // For Proto DataStore
 
 android {
-    namespace "de.cyface.utils"
+    namespace = "de.cyface.utils"
     compileSdk = rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdk = rootProject.ext.minSdkVersion
 
-        versionName rootProject.ext.version
-
-        testInstrumentationRunner rootProject.ext.testInstrumentationRunner
+        testInstrumentationRunner = rootProject.ext.testInstrumentationRunner
     }
 
     // Enable Proguard for the release build type.
@@ -52,6 +48,8 @@ android {
 
     // Required by Roboletric
     testOptions {
+        // A library has no targetSdk of its own, the app sets it. This one is only used by the tests.
+        targetSdk = rootProject.ext.targetSdkVersion
         unitTests {
             includeAndroidResources = true
             returnDefaultValues = true
@@ -59,42 +57,43 @@ android {
     }
 
     // Enabling desugaring to support Java 8 and Java 11 features
+    // The Kotlin `jvmTarget` uses the `targetCompatibility`
     compileOptions {
-        sourceCompatibility rootProject.ext.sourceCompatibility
-        targetCompatibility rootProject.ext.targetCompatibility
+        sourceCompatibility = rootProject.ext.sourceCompatibility
+        targetCompatibility = rootProject.ext.targetCompatibility
     }
 
-    kotlinOptions {
-        jvmTarget = rootProject.ext.kotlinTargetJavaVersion
+    lint {
+        targetSdk = rootProject.ext.targetSdkVersion
     }
 }
 
 dependencies {
     // Android
     // `api` as the API-class `PlaceholderNotificationBuilder` uses compat
-    api "androidx.appcompat:appcompat:$androidxAppCompatVersion"
+    api "androidx.appcompat:appcompat:${rootProject.ext.androidxAppCompatVersion}"
 
     // Proto DataStore with MultiProcess support to store settings
     // `api` as the API-class `AppSettings` uses datastore
-    api "androidx.datastore:datastore:$datastoreVersion"
-    implementation  "com.google.protobuf:protobuf-javalite:$protobufVersion"
+    api "androidx.datastore:datastore:${rootProject.ext.datastoreVersion}"
+    implementation  "com.google.protobuf:protobuf-javalite:${rootProject.ext.protobufVersion}"
 
     // Dependencies for instrumentation tests
-    androidTestImplementation "androidx.test.ext:junit:$junitVersion"
-    androidTestImplementation "androidx.test:rules:$rulesVersion"
+    androidTestImplementation "androidx.test.ext:junit:${rootProject.ext.junitVersion}"
+    androidTestImplementation "androidx.test:rules:${rootProject.ext.rulesVersion}"
 
     // Dependencies for local unit tests
-    testImplementation "androidx.test.ext:junit:$junitVersion"
-    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    testImplementation "androidx.test.ext:junit:${rootProject.ext.junitVersion}"
+    testImplementation "org.mockito:mockito-core:${rootProject.ext.mockitoVersion}"
     // Optional - For better debuggable asserts
-    testImplementation "org.hamcrest:hamcrest:$hamcrestVersion"
-    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation "org.hamcrest:hamcrest:${rootProject.ext.hamcrestVersion}"
+    testImplementation "org.robolectric:robolectric:${rootProject.ext.robolectricVersion}"
 }
 
 // Required for Proto DataStore
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:$protobufVersion"
+        artifact = "com.google.protobuf:protoc:${rootProject.ext.protobufVersion}"
     }
 
     // Generates the java Protobuf-lite code for the Protobuf files in this project. See

@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2025 Cyface GmbH
+ * Copyright 2017-2026 Cyface GmbH
  *
  * This file is part of the Cyface Utils for Android.
  *
@@ -20,13 +20,13 @@
  * Top-level build file where you can add configuration options common to all sub-projects/modules.
  *
  * @author Armin Schnabel
- * @version 2.2.4
+ * @version 2.3.0
  * @since 1.0.0
  */
 
 buildscript {
-    ext.gradle_version = "8.5.0"
-    ext.kotlin_version = "2.0.21"
+    ext.gradle_version = "9.4.1"
+    ext.kotlin_version = "2.4.21" // Kotlin is built into AGP 9, this sets the Kotlin version
 
     repositories {
         google()
@@ -40,7 +40,7 @@ buildscript {
 }
 
 plugins {
-    id 'com.google.protobuf' version '0.9.4' apply false // Maybe keep in sync with other usages
+    id 'com.google.protobuf' version '0.10.0' apply false // Maybe keep in sync with other usages
 }
 
 ext {
@@ -51,28 +51,27 @@ ext {
 
     // Android SDK versions
     minSdkVersion = 26 // device support
-    targetSdkVersion = 34 // behavioral changes, follow migration guide & test the app against this
-    compileSdkVersion = 34 // allows newest APIs to be used and to see deprecations, use latest
+    targetSdkVersion = 36 // behavioral changes, follow migration guide & test the app against this
+    compileSdkVersion = 37 // allows newest APIs to be used and to see deprecations, use latest
 
     // Android dependencies
-    androidxAppCompatVersion = "1.7.0"
-    datastoreVersion = "1.1.3"
+    androidxAppCompatVersion = "1.8.0"
+    datastoreVersion = "1.3.0"
 
     // Other
-    protobufVersion = '4.30.0' // For Proto Datastore. Maybe keep in sync with other versions.
+    protobufVersion = '4.36.2' // For Proto Datastore. Maybe keep in sync with other versions.
 
     // Testing
-    junitVersion = "1.2.1"
-    mockitoVersion = '5.16.0'
+    junitVersion = "1.3.0"
+    mockitoVersion = '5.24.0'
     hamcrestVersion = "3.0"
-    rulesVersion = "1.6.1"
-    robolectricVersion = "4.14.1"
+    rulesVersion = "1.7.0"
+    robolectricVersion = "4.17"
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
     // Java version
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
-    kotlinTargetJavaVersion = "21"
 }
 
 allprojects {
@@ -82,5 +81,3 @@ allprojects {
         gradlePluginPortal()
     }
 }
-
-apply plugin: 'android-reporting'
